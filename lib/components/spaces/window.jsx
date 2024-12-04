@@ -1,5 +1,6 @@
 import * as Uebersicht from "uebersicht";
 import * as AppIcons from "../../app-icons";
+import { SuspenseIcon } from "../icons/icon.jsx";
 import { useSimpleBarContext } from "../simple-bar-context.jsx";
 import * as Utils from "../../utils";
 import * as Yabai from "../../yabai";
@@ -13,6 +14,7 @@ export default function Window({ window }) {
     displayOnlyCurrent,
     hideWindowTitle,
     displayOnlyIcon,
+    expandAllProcesses,
     displayStackIndex,
     displayOnlyCurrentStack,
   } = settings.process;
@@ -52,6 +54,7 @@ export default function Window({ window }) {
   };
 
   const classes = Utils.classNames("process__window", {
+    "process__window--expanded": expandAllProcesses,
     "process__window--focused": !displayOnlyCurrent && isFocused,
     "process__window--only-current": displayOnlyCurrent,
     "process__window--only-icon": displayOnlyIcon,
@@ -74,7 +77,9 @@ export default function Window({ window }) {
       onMouseEnter={displayOnlyIcon ? undefined : onMouseEnter}
       onMouseLeave={displayOnlyIcon ? undefined : onMouseLeave}
     >
-      <Icon className="process__icon" />
+      <SuspenseIcon>
+        <Icon className="process__icon" />
+      </SuspenseIcon>
       {!displayOnlyIcon && (
         <span className="process__inner">
           <span className="process__name">{processName}</span>
