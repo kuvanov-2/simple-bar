@@ -35,7 +35,7 @@ const refreshFrequency = false;
 
 const settings = Settings.get();
 const {
-  yabaiPath = "/usr/local/bin/yabai",
+  yabaiPath = "/opt/homebrew/bin/yabai",
   shell,
   enableServer,
   yabaiServerRefresh,
